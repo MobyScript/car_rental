@@ -1,29 +1,18 @@
-import Image from 'next/image'
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Rent a Car !</h1>
+    <>
+      <header className="flex justify-between items-center mb-4">
+        <h1 className="bg-white rounded-md p-3">Welcome to Car Rental</h1>
+        <Link href="/Login" className="bg-white rounded-md p-3">
+          Login
+        </Link>
+      </header>
 
-      <form  action="">
-        {/* Required Data */}
-        <input type="text" placeholder='Name' required/>
-        <input type="text" placeholder='Email'required/>
-        <input type="text" required/>
-        <input type="text" required/>
-        <input type="text" required/>
+      {/* Button if user is new */}
 
-        <select name="" id="">
-          <option value=""></option>
-          
-        </select>
-
-        {/* Optional data */}
-        <input type="text" placeholder='Phone Number' required/>
-        <input type="text" placeholder='Company Name'/>
-
-
-      </form>
-    </main>
-  )
+      {/* Button if its a n old user */}
+    </>
+  );
 }
