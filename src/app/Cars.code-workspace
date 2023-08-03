@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "Cars",
+		"path": "../../../Cars"
+	},
+	{
+		"name": "car_rental",
+		"path": "../.."
+	}
+],
+  "settings": {}
+}

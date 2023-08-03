@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import CarImage from "../.././Images/Car1.avif";
 
 export default function Home() {
   return (
@@ -10,9 +12,10 @@ export default function Home() {
         </Link>
       </header>
 
-      {/* Button if user is new */}
-
-      {/* Button if its a n old user */}
+      {/* Image spinning in the middle of the screen */}
+      <div className="h-20 flex items-center justify-center bg-white ">
+        <Image src={CarImage} alt={"Dodge Car"} className="h-40 w-40" />
+      </div>
     </>
   );
 }
