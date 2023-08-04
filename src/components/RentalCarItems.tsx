@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaSpinner } from "react-icons/fa";
-type RentalCarItemProps = {
+export type RentalCarItemProps = {
   name: string;
   email: string;
   numberOfDays: number;

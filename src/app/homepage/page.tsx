@@ -1,10 +1,54 @@
 /* eslint-disable @next/next/no-async-client-component */
 import { prisma } from "@/db";
 import Link from "next/link";
-import { handleCarRequest } from "../api/carForm/carHandler";
 
 const HomePage = async () => {
-  const RequiredCars = await prisma.car.findMany();
+  const LastCustomerDetails = await prisma.rentalCar.findMany(
+    // Selecting the last row from the table
+    {
+      orderBy: {
+        id: "desc",
+      },
+      take: 1,
+    }
+  );
+  const Customer_ID = LastCustomerDetails.map((car) => car.id);
+  const Customer_location = LastCustomerDetails.map((car) => car.location);
+  const Customer_NumberOfDays = LastCustomerDetails.map(
+    (car) => car.numberOfDays
+  );
+  // console.log("LastCustomerDetails", Customer_location);
+  const RequiredCars = await prisma.car.findMany({
+    where: {
+      location: Customer_location[0],
+    },
+  });
+
+  // Calculate the discounted prices for the cars
+  const updatedCars = RequiredCars.map((car) => {
+    const pricePerDay = car.location === "Riyadh" ? 1500 : car.pricePerDay * 2;
+    const discountedPrice =
+      Number(Customer_NumberOfDays) > 3
+        ? (Number(Customer_NumberOfDays) - 3) * 0.8 * pricePerDay +
+          3 * pricePerDay
+        : Number(Customer_NumberOfDays) * pricePerDay;
+
+    return {
+      ...car,
+      pricePerDay,
+      discountedPrice,
+    };
+  });
+
+  // Update the cars with the calculated prices
+
+  // const UpdatedPrices = await prisma.car.updateMany({
+  //   where: {
+  //     rentalCarId: Customer_ID[0],
+  //   },
+  //   data: updatedCars,
+  // });
+  console.log(updatedCars);
 
   return (
     <>
@@ -29,7 +73,7 @@ const HomePage = async () => {
         </p>
 
         <ul>
-          {RequiredCars.map((car) => (
+          {updatedCars.map((car) => (
             <li className="border rounded-lg mb-4" key={car.id}>
               <div className="flex items-start justify-between p-4 ">
                 <div className="space-y-2">
