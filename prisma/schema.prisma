@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,4 +16,17 @@ model RentalCar {
   location     String
   phoneNumber  String?
   companyName  String?
+  cars         Car[]   @relation("RentalCarCars") // Relation with the Car model
+}
+
+// Added Car model to the schema to showcase the cars depending on the customer's requirements
+
+model Car {
+  id              Int        @id @default(autoincrement())
+  name            String
+  pricePerDay     Int
+  location        String
+  rentalCar       RentalCar? @relation("RentalCarCars", fields: [rentalCarId], references: [id]) // Relation with the RentalCar model
+  rentalCarId     Int? // Field to store the foreign key of the rentalCar relationship
+  discountedPrice Int        @default(0) // Field to store the discounted price (if any)
 }
