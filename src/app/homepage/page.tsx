@@ -12,12 +12,12 @@ const HomePage = async () => {
       take: 1,
     }
   );
-  const Customer_ID = LastCustomerDetails.map((car) => car.id);
   const Customer_location = LastCustomerDetails.map((car) => car.location);
   const Customer_NumberOfDays = LastCustomerDetails.map(
     (car) => car.numberOfDays
   );
-  // console.log("LastCustomerDetails", Customer_location);
+
+  // Getting the car depending on the location of the Customer
   const RequiredCars = await prisma.car.findMany({
     where: {
       location: Customer_location[0],
@@ -29,8 +29,7 @@ const HomePage = async () => {
     const pricePerDay = car.location === "Riyadh" ? 1500 : car.pricePerDay * 2;
     const discountedPrice =
       Number(Customer_NumberOfDays) > 3
-        ? (Number(Customer_NumberOfDays) - 3) * 0.8 * pricePerDay +
-          3 * pricePerDay
+        ? Number(Customer_NumberOfDays) * 0.8 * pricePerDay // 20% discount
         : Number(Customer_NumberOfDays) * pricePerDay;
 
     return {
@@ -39,16 +38,6 @@ const HomePage = async () => {
       discountedPrice,
     };
   });
-
-  // Update the cars with the calculated prices
-
-  // const UpdatedPrices = await prisma.car.updateMany({
-  //   where: {
-  //     rentalCarId: Customer_ID[0],
-  //   },
-  //   data: updatedCars,
-  // });
-  console.log(updatedCars);
 
   return (
     <>

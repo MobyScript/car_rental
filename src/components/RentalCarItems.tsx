@@ -54,17 +54,21 @@ export function RentalCarItem() {
     <main className="py-14">
       <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
         <div className="max-w-lg mx-auto space-y-3 sm:text-center">
-          <h3 className="text-indigo-600 font-semibold">Rent a Car !</h3>
-          <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+          <h1 className="text-indigo-600 font-semibold text-5xl">
+            Rent a Car !
+          </h1>
+          <h4 className="text-gray-800  font-semibold sm:text-4xl">
             {`Let's Get started`}
-          </p>
+          </h4>
           <p>Please fill out the form so we can find the best car for you!</p>
         </div>
         <div className="mt-12 max-w-lg mx-auto">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="flex flex-col items-center gap-y-5 gap-x-6 [&>*]:w-full sm:flex-row"></div>
             <div>
-              <label className="font-medium">Name</label>
+              <label className="font-medium">
+                Name <span className="text-red-600">*</span>
+              </label>
               <input
                 type="name"
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
@@ -72,7 +76,9 @@ export function RentalCarItem() {
               />
             </div>
             <div>
-              <label className="font-medium">Email</label>
+              <label className="font-medium">
+                Email <span className="text-red-600">*</span>
+              </label>
               <input
                 type="email"
                 {...register("email", {
@@ -92,14 +98,16 @@ export function RentalCarItem() {
                 </div>
                 <input
                   type="phoneNumber"
-                  placeholder="+966 50 000-0000"
-                  {...register("phoneNumber", { required: true })}
+                  placeholder="+966 50 000-0000 "
+                  {...register("phoneNumber", { required: false })}
                   className="w-full pl-[4.5rem] pr-3 py-2 appearance-none bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 />
               </div>
             </div>
             <div>
-              <label className="font-medium">Number of Days</label>
+              <label className="font-medium">
+                Number of Days <span className="text-red-600">*</span>
+              </label>
               <div className="relative mt-2">
                 <input
                   type="text"
@@ -110,7 +118,9 @@ export function RentalCarItem() {
               </div>
             </div>
             <div>
-              <label className="font-medium">Number of Cars</label>
+              <label className="font-medium">
+                Number of Cars <span className="text-red-600">*</span>
+              </label>
               <div className="relative mt-2">
                 <input
                   type="text"
@@ -122,7 +132,9 @@ export function RentalCarItem() {
             </div>
 
             <div>
-              <label className="font-medium">Location</label>
+              <label className="font-medium">
+                Location <span className="text-red-600">*</span>
+              </label>
               <div className="relative mt-2">
                 <div>
                   <select
@@ -139,6 +151,7 @@ export function RentalCarItem() {
             <div>
               <label className="font-medium">Company Name</label>
               <input
+                placeholder="eg. Google"
                 type="companyName"
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                 {...register("companyName", { required: false })}
