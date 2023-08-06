@@ -13,6 +13,9 @@ const HomePage = async () => {
     }
   );
   const Customer_location = LastCustomerDetails.map((car) => car.location);
+  const Customer_NumberOfCars = LastCustomerDetails.map(
+    (car) => car.numberOfCars
+  );
   const Customer_NumberOfDays = LastCustomerDetails.map(
     (car) => car.numberOfDays
   );
@@ -22,6 +25,7 @@ const HomePage = async () => {
     where: {
       location: Customer_location[0],
     },
+    take: Customer_NumberOfCars[0],
   });
 
   // Calculate the discounted prices for the cars
